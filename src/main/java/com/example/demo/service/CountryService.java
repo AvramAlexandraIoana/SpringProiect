@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Country;
 import com.example.demo.repository.CountryRepository;
 import com.example.demo.utils.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class CountryService {
-
     private CountryRepository countryRepository;
 
     public CountryService(CountryRepository countryRepository) {

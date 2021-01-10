@@ -71,7 +71,7 @@ public class CountryServiceTest {
     public void getAllCountriesTest(){
         //arrange
         when(countryRepository.get()).thenReturn(
-                Arrays.asList(new Country("Romania"))
+                Arrays.asList(new Country(1, "Romania"))
         );
 
         //act
@@ -80,6 +80,7 @@ public class CountryServiceTest {
         //assert
         Country country = result.get(0);
         assertEquals(result.size(), 1);
+        assertEquals(country.getCountryId(), 1);
         assertEquals(country.getName(), "Romania");
     }
 
@@ -95,6 +96,7 @@ public class CountryServiceTest {
         Country result = countryService.update(country);
 
         //assert
+        assertEquals(country.getCountryId(), 1);
         assertEquals(country.getName(), result.getName());
 
         verify(countryRepository, times(1)).getById(country.getCountryId());
@@ -113,6 +115,7 @@ public class CountryServiceTest {
         Optional<Country> result = countryService.delete(country.getCountryId());
 
         //assert
+        assertEquals(country.getCountryId(), 1);
         assertEquals(country.getName(), result.get().getName());
 
         verify(countryRepository, times(1)).getById(country.getCountryId());
