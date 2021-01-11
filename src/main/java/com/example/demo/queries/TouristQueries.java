@@ -6,4 +6,6 @@ public class TouristQueries {
     public final static String UPDATE_SQL = "UPDATE tourist SET firstName = ?, lastName = ?,  dateOfBirth = ? WHERE touristId = ?";
     public final static String DELETE_SQL = "DELETE FROM tourist WHERE touristId = ?";
     public final static String GETBYID_SQL = "SELECT * FROM tourist WHERE touristId = ?";
+    public final static String ORDER_ASC_SQL = "SELECT * FROM tourist ORDER BY firstName ASC";
+    public final static String ORDER_DESC_SQL = "SELECT * FROM tourist ORDER BY firstName DESC";
 }

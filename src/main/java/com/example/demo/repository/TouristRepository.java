@@ -74,4 +74,11 @@ public class TouristRepository {
             return Optional.empty();
         }
     }
+
+    public List<Tourist> orderTurists(String type) {
+        List<Tourist> tourists = type.equals("asc") ? jdbcTemplate.query(TouristQueries.ORDER_ASC_SQL, new BeanPropertyRowMapper<>(Tourist.class))
+                                                    : jdbcTemplate.query(TouristQueries.ORDER_DESC_SQL, new BeanPropertyRowMapper<>(Tourist.class));
+        logger.info("Ordam turistii " + type + " ", tourists);
+        return tourists;
+    }
 }

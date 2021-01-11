@@ -57,4 +57,11 @@ public class TouristController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(touristService.delete(id));
     }
+
+
+    @GetMapping("/order")
+    private ResponseEntity<List<Tourist>> orderTurists(@RequestParam String type) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(touristService.orderTurists(type));
+    }
 }

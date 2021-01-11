@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Tourist;
+import com.example.demo.queries.TouristQueries;
 import com.example.demo.repository.TouristRepository;
 import com.example.demo.utils.ObjectNotFoundException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +40,9 @@ public class TouristService {
             throw new ObjectNotFoundException("Nu exista turist cu acest id!");
         }
         return touristRepository.delete(id);
+    }
+
+    public List<Tourist> orderTurists(String type) {
+        return touristRepository.orderTurists(type);
     }
 }
