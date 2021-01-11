@@ -11,6 +11,10 @@ public class LocationUpdate {
     @Min(value = 1, message = "Id-ul locatiei trebuie sa fie mai mare decat 0!")
     private int locationId;
 
+    @NotBlank(message = "Orasul nu poate fi gol!")
+    @NotNull(message = "Orasul nu poate fi null!")
+    private String city;
+
     @NotBlank(message = "Adresa nu poate fi goala!")
     @NotNull(message = "Adresa nu poate fi null!")
     private String address;
@@ -22,8 +26,9 @@ public class LocationUpdate {
     public LocationUpdate() {
     }
 
-    public LocationUpdate(int locationId, String address, int countryCode) {
+    public LocationUpdate(int locationId, String city, String address, int countryCode) {
         this.locationId = locationId;
+        this.city = city;
         this.address = address;
         this.countryCode = countryCode;
     }
@@ -34,6 +39,14 @@ public class LocationUpdate {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getAddress() {
@@ -53,9 +66,11 @@ public class LocationUpdate {
     }
 
     @Override
-    public String toString() {
+    public
+    String toString() {
         return "LocationUpdate{" +
                 "locationId=" + locationId +
+                ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
                 ", countryCode=" + countryCode +
                 '}';

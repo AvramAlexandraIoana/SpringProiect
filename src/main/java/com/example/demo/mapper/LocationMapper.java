@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class LocationMapper {
     public Location locationRequestToLocation(LocationRequest locationRequest) {
-        return new Location(locationRequest.getAddress(), locationRequest.getCountryCode());
+        return new Location(locationRequest.getCity(), locationRequest.getAddress(), locationRequest.getCountryCode());
     }
 
     public Location locationUpdateToLocation(LocationUpdate locationUpdate) {
-        return new Location(locationUpdate.getLocationId(), locationUpdate.getAddress(), locationUpdate.getCountryCode());
+        return new Location(locationUpdate.getLocationId(), locationUpdate.getCity(), locationUpdate.getAddress(), locationUpdate.getCountryCode());
     }
 }

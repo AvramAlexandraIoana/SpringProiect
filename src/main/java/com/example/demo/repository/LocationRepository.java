@@ -30,8 +30,9 @@ public class LocationRepository {
         PreparedStatementCreator preparedStatementCreator = (connection) -> {
             PreparedStatement preparedStatement = connection.prepareStatement(LocationQueries.CREATE_SQL, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setObject(1, null);
-            preparedStatement.setString(2, location.getAddress());
-            preparedStatement.setInt(3, location.getCountryCode());
+            preparedStatement.setString(2, location.getCity());
+            preparedStatement.setString(3, location.getAddress());
+            preparedStatement.setInt(4, location.getCountryCode());
             return preparedStatement;
         };
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
@@ -49,7 +50,7 @@ public class LocationRepository {
 
     public Location update(Location location) {
         logger.info("S-au updatat locatia cu id-ul", location.getLocationId());
-        jdbcTemplate.update(LocationQueries.UPDATE_SQL, location.getAddress(), location.getCountryCode(), location.getLocationId());
+        jdbcTemplate.update(LocationQueries.UPDATE_SQL, location.getCity(), location.getAddress(), location.getCountryCode(), location.getLocationId());
         return location;
     }
 

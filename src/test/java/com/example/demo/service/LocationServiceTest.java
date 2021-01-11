@@ -54,8 +54,8 @@ public class LocationServiceTest {
     @DisplayName("Adaugarea unei locatii in repo")
     public void createLocationTest() {
         //arrange
-        Location location = new Location("Bucuresti", 1);
-        Location savedLocation = new Location(1, "Bucuresti", 1);
+        Location location = new Location("Bucuresti","Str.Unirii", 1);
+        Location savedLocation = new Location("Bucuresti","Str.Unirii", 1);
         when(locationRepository.create(location)).thenReturn(savedLocation);
 
         //act
@@ -73,7 +73,7 @@ public class LocationServiceTest {
     public void getAllLocationsTest(){
         //arrange
         when(locationRepository.get()).thenReturn(
-                Arrays.asList(new Location(1, "Bucuresti", 1))
+                Arrays.asList(new Location(1,"Bucuresti","Str.Unirii", 1))
         );
 
         //act
@@ -82,7 +82,8 @@ public class LocationServiceTest {
         //assert
         Location location = result.get(0);
         assertEquals(result.size(), 1);
-        assertEquals(location.getAddress(), "Bucuresti");
+        assertEquals(location.getCity(), "Bucuresti");
+        assertEquals(location.getAddress(), "Str.Unirii");
         assertEquals(location.getCountryCode(), 1);
     }
 
@@ -90,7 +91,7 @@ public class LocationServiceTest {
     @DisplayName("Updatarea unei locatii")
     public void updateCountryTest() {
         //arrange
-        Location location = new Location(1,"Bucuresti", 1);
+        Location location = new Location(1,"Bucuresti", "Str.Unirii", 1);
         when(locationRepository.getById(location.getLocationId())).thenReturn(Optional.of(location));
         when(locationRepository.update(location)).thenReturn(location);
 
@@ -109,7 +110,7 @@ public class LocationServiceTest {
     @DisplayName("Stergerea unei locatii")
     public void deleteCountryTest() {
         //arrange
-        Location location = new Location(1,"Bucuresti", 1);
+        Location location = new Location(1,"Bucuresti", "Str.Unirii", 1);
         when(locationRepository.getById(location.getLocationId())).thenReturn(Optional.of(location));
         when(locationRepository.delete(location.getLocationId())).thenReturn(Optional.of(location));
 
