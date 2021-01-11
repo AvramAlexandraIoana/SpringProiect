@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.MinMaxSumAvgPrice;
 import com.example.demo.model.Tourist;
 import com.example.demo.model.Trip;
 import com.example.demo.queries.TripQueries;
@@ -84,7 +85,12 @@ public class TripRepository {
         List<Trip> trips = jdbcTemplate.query(TripQueries.GETBYTOURISTID_SQL, new BeanPropertyRowMapper<>(Trip.class), id);
         logger.info("S-a preluat excursiile achizitionate de turistul cu id-ul ", id);
         return  trips;
+    }
 
+    public List<MinMaxSumAvgPrice> minMaxSumAvgPrices() {
+        List<MinMaxSumAvgPrice>  minMaxSumAvgPrices = jdbcTemplate.query(TripQueries.MINMAXSUMAVGPRICE_SQL, new BeanPropertyRowMapper<>(MinMaxSumAvgPrice.class));
+        logger.info("S-a preluat cel mai mare pret al unei excursii, cel mai mic pret, suma și media preturilor tuturor excursiilor ", minMaxSumAvgPrices);
+        return minMaxSumAvgPrices;
     }
 
 }

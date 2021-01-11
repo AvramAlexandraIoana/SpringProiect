@@ -59,6 +59,9 @@ public class TouristController {
     }
 
 
+    /*
+    Sa se afiseze turistii ordonati crescator/descrescator dupa nume.
+     */
     @GetMapping("/order")
     private ResponseEntity<List<Tourist>> orderTurists(@RequestParam String type) {
         return ResponseEntity.status(HttpStatus.OK)

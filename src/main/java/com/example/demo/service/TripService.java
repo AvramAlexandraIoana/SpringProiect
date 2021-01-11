@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.MinMaxSumAvgPrice;
 import com.example.demo.model.Purchase;
 import com.example.demo.model.Tourist;
 import com.example.demo.model.Trip;
@@ -54,5 +55,9 @@ public class TripService {
             throw new ObjectNotFoundException("Nu exista nicio excursie achizitionata de turistul cu acest id!");
         }
         return tripRepository.getTripByTouristId(id);
+    }
+
+    public List<MinMaxSumAvgPrice> minMaxSumAvgPrices() {
+        return tripRepository.minMaxSumAvgPrices();
     }
 }

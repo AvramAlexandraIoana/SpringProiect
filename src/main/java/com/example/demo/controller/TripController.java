@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.TripRequest;
 import com.example.demo.dto.TripUpdate;
 import com.example.demo.mapper.TripMapper;
+import com.example.demo.model.MinMaxSumAvgPrice;
 import com.example.demo.model.Tourist;
 import com.example.demo.model.Trip;
 import com.example.demo.service.TripService;
@@ -59,9 +60,23 @@ public class TripController {
                 .body(tripService.delete(id));
     }
 
+
+    /*
+    Sa se afiseze toate excursiile achizitionate de turistul cu id-ul x.
+     */
     @GetMapping("/getTripByTouristId")
     public  ResponseEntity<List<Trip>> getTripByTouristId(@RequestParam int id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(tripService.getTripByTouristId(id));
+    }
+
+    /*
+    Sa se afiseze cel mai mare pret al unei excursii, cel mai mic pret, suma
+    și media preturilor tuturor excursiilor.
+     */
+    @GetMapping("/getTripMinMaxSumAvgPrices")
+    public ResponseEntity<List<MinMaxSumAvgPrice>> minMaxSumAvgPrices() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(tripService.minMaxSumAvgPrices());
     }
 }

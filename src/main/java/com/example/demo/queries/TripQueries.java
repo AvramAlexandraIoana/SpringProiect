@@ -12,4 +12,7 @@ public class TripQueries {
             "FROM mydb.tourist t join  mydb.purchase p on t.touristId = p.touristCode\n" +
             "\t\tjoin mydb.trip tr on tr.tripId = p.tripCode\n" +
             "WHERE t.touristId = ?;";
+
+    public final static String MINMAXSUMAVGPRICE_SQL  = "SELECT MIN(price) \"min\", MAX(price) \"max\", SUM(price) \"sum\", AVG(price) \"avg\"\n" +
+            "FROM  mydb.trip;";
 }

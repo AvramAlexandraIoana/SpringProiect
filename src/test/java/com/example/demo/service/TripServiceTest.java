@@ -1,4 +1,5 @@
 package com.example.demo.service;
+import com.example.demo.model.MinMaxSumAvgPrice;
 import com.example.demo.model.Purchase;
 import com.example.demo.model.Trip;
 import com.example.demo.repository.PurchaseRepository;
@@ -182,6 +183,29 @@ public class TripServiceTest {
 
         verify(purchaseRepository, times(1)).getByTouristId(1);
         verify(tripRepository, times(1)).getTripByTouristId(1);
+    }
+
+    @Test
+    @DisplayName("Cel mai mare pret al unei excursii, cel mai mic, suma și media preturilor tuturor excursiilor. ")
+    public void minMaxSumAvgPriceTest() {
+        //arrange
+        MinMaxSumAvgPrice minMaxSumAvgPrice = new MinMaxSumAvgPrice(1, 10, 200, 12);
+        when(tripRepository.minMaxSumAvgPrices()).thenReturn(
+                Arrays.asList(new MinMaxSumAvgPrice(1, 10, 200, 12))
+        );
+
+        //act
+        List<MinMaxSumAvgPrice> result = tripService.minMaxSumAvgPrices();
+
+        //assert
+        assertEquals(result.size(), 1);
+        assertEquals(minMaxSumAvgPrice.getMin(), result.get(0).getMin());
+        assertEquals(minMaxSumAvgPrice.getMax(), result.get(0).getMax());
+        assertEquals(minMaxSumAvgPrice.getSum(), result.get(0).getSum());
+        assertEquals(minMaxSumAvgPrice.getAvg(), result.get(0).getAvg());
+
+
+        verify(tripRepository, times(1)).minMaxSumAvgPrices();
     }
 
 
