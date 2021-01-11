@@ -1,8 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Agency;
+import com.example.demo.model.AgencyWithNumberOfTrips;
+import com.example.demo.queries.AgencyQueries;
 import com.example.demo.repository.AgencyRepository;
 import com.example.demo.utils.ObjectNotFoundException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,5 +42,9 @@ public class AgencyService {
             throw new ObjectNotFoundException("Nu exista agentia cu acest id!");
         }
         return agencyRepository.delete(id);
+    }
+
+    public List<AgencyWithNumberOfTrips> agencyWithNumberOfTrips() {
+        return  agencyRepository.agencyWithNumberOfTrips();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 import com.example.demo.model.Agency;
+import com.example.demo.model.AgencyWithNumberOfTrips;
 import com.example.demo.repository.AgencyRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -124,6 +125,27 @@ public class AgencyServiceTest {
 
         verify(agencyRepository, times(1)).getById(agency.getAgencyId());
         verify(agencyRepository, times(1)).delete(agency.getAgencyId());
+    }
+
+    @Test
+    @DisplayName("Afisarea id-ului, numele agentiei si numarul de excursii de la acea agentie")
+    public void agencyWithNumberOfTripsTest() {
+        //arrange
+        AgencyWithNumberOfTrips agencyWithNumberOfTrips = new AgencyWithNumberOfTrips(1, "Ego Travel Romania", 3);
+        when(agencyRepository.agencyWithNumberOfTrips()).thenReturn(
+                Arrays.asList(new AgencyWithNumberOfTrips(1, "Ego Travel Romania", 3))
+        );
+
+        //act
+        List<AgencyWithNumberOfTrips> result = agencyService.agencyWithNumberOfTrips();
+
+        //assert
+        assertEquals(agencyWithNumberOfTrips.getAgencyId(), 1);
+        assertEquals(agencyWithNumberOfTrips.getName(), result.get(0).getName());
+        assertEquals(agencyWithNumberOfTrips.getTripCount(), result.get(0).getTripCount());
+
+
+        verify(agencyRepository, times(1)).agencyWithNumberOfTrips();
     }
 
 

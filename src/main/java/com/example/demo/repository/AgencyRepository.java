@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Agency;
+import com.example.demo.model.AgencyWithNumberOfTrips;
 import com.example.demo.queries.AgencyQueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,5 +72,11 @@ public class AgencyRepository {
         } else {
             return Optional.empty();
         }
+    }
+
+    public List<AgencyWithNumberOfTrips> agencyWithNumberOfTrips() {
+        logger.info("Se afiseaza id-ul, numele agentiei si numarul de excursii de la acea agentie!");
+        List<AgencyWithNumberOfTrips> agencyWithNumberOfTrips = jdbcTemplate.query(AgencyQueries.GETAGENCYWITHNUMBEROFTRIPS_SQL, new BeanPropertyRowMapper<>(AgencyWithNumberOfTrips.class));
+        return  agencyWithNumberOfTrips;
     }
 }
