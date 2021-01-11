@@ -75,10 +75,16 @@ public class TouristRepository {
         }
     }
 
-    public List<Tourist> orderTurists(String type) {
-        List<Tourist> tourists = type.equals("asc") ? jdbcTemplate.query(TouristQueries.ORDER_ASC_SQL, new BeanPropertyRowMapper<>(Tourist.class))
-                                                    : jdbcTemplate.query(TouristQueries.ORDER_DESC_SQL, new BeanPropertyRowMapper<>(Tourist.class));
-        logger.info("Ordam turistii " + type + " ", tourists);
+    public List<Tourist> orderTuristsAsc() {
+        List<Tourist> tourists = jdbcTemplate.query(TouristQueries.ORDER_ASC_SQL, new BeanPropertyRowMapper<>(Tourist.class));
+        logger.info("Ordam turistii crescator ", tourists);
         return tourists;
     }
+
+    public List<Tourist> orderTuristsDesc() {
+        List<Tourist> tourists = jdbcTemplate.query(TouristQueries.ORDER_DESC_SQL, new BeanPropertyRowMapper<>(Tourist.class));
+        logger.info("Ordam turistii descrecator ", tourists);
+        return tourists;
+    }
+
 }

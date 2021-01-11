@@ -8,4 +8,5 @@ public class PurchaseQueries {
             " WHERE touristCode = ? AND tripCode = ?";
     public final static String DELETE_SQL = "DELETE FROM purchase WHERE touristCode = ? AND tripCode = ?";
     public final static String GETBYID_SQL = "SELECT * FROM purchase WHERE touristCode = ? AND tripCode = ?";
+    public final static String GETBYTOURISTID_SQL = "SELECT * FROM purchase WHERE touristCode = ?";
 }

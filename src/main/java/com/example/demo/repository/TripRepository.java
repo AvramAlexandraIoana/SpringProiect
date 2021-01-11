@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Tourist;
 import com.example.demo.model.Trip;
 import com.example.demo.queries.TripQueries;
 import org.slf4j.Logger;
@@ -78,4 +79,12 @@ public class TripRepository {
             return Optional.empty();
         }
     }
+
+    public  List<Trip> getTripByTouristId(int id) {
+        List<Trip> trips = jdbcTemplate.query(TripQueries.GETBYTOURISTID_SQL, new BeanPropertyRowMapper<>(Trip.class), id);
+        logger.info("S-a preluat excursiile achizitionate de turistul cu id-ul ", id);
+        return  trips;
+
+    }
+
 }

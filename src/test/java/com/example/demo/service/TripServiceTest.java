@@ -1,5 +1,7 @@
 package com.example.demo.service;
+import com.example.demo.model.Purchase;
 import com.example.demo.model.Trip;
+import com.example.demo.repository.PurchaseRepository;
 import com.example.demo.repository.TripRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,7 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +28,9 @@ public class TripServiceTest {
 
     @Mock
     private TripRepository tripRepository;
+
+    @Mock
+    private PurchaseRepository purchaseRepository;
 
     //@BeforeEach
     //@BeforeAll
@@ -140,6 +149,39 @@ public class TripServiceTest {
 
         verify(tripRepository, times(1)).getById(trip.getTripId());
         verify(tripRepository, times(1)).delete(trip.getTripId());
+    }
+
+    @Test
+    @DisplayName("Excursiile achizitionate de turistul cu id-ul x")
+    public void getTripByTouristIdTest() throws ParseException {
+        //arrange
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = format.parse("2020-12-25");
+        Date endDate = format.parse("2020-12-31");
+        Purchase purchase = new Purchase(1, 1, startDate, endDate, new Date(), 12.2);
+        Trip trip = new Trip(1,"Excursie Predeal", 200.0, 10, 2, 1 , 1);
+        when(tripRepository.getTripByTouristId(1)).thenReturn(
+                Arrays.asList(new Trip(1,"Excursie Predeal", 200.0, 10, 2, 1 , 1))
+        );
+        when(purchaseRepository.getByTouristId(1)).thenReturn(Optional.of(purchase));
+
+
+        //act
+        List<Trip> result = tripService.getTripByTouristId(1);
+
+        //assert
+        Trip firstTrip = result.get(0);
+        assertEquals(trip.getTripId(), 1);
+        assertEquals(trip.getName(), firstTrip.getName());
+        assertEquals(trip.getPrice(), firstTrip.getPrice());
+        assertEquals(trip.getNumberOfSeats(), firstTrip.getNumberOfSeats());
+        assertEquals(trip.getDuration(), firstTrip.getDuration());
+        assertEquals(trip.getAgencyId(), firstTrip.getAgencyId());
+        assertEquals(trip.getLocationId(), firstTrip.getLocationId());
+
+
+        verify(purchaseRepository, times(1)).getByTouristId(1);
+        verify(tripRepository, times(1)).getTripByTouristId(1);
     }
 
 

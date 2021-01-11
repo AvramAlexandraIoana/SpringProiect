@@ -53,6 +53,10 @@ public class PurchaseRepository {
         return getPurchaseFromResultSet(jdbcTemplate.query(PurchaseQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Purchase.class), touristId, tripId));
     }
 
+    public Optional<Purchase> getByTouristId(int touristId) {
+        logger.info("S-a preluat achizita care are id-ul turistului", touristId);
+        return getPurchaseFromResultSet(jdbcTemplate.query(PurchaseQueries.GETBYTOURISTID_SQL, new BeanPropertyRowMapper<>(Purchase.class), touristId));
+    }
 
     private Optional<Purchase> getPurchaseFromResultSet(List<Purchase> purchases) {
         if (purchases != null && !purchases.isEmpty()) {

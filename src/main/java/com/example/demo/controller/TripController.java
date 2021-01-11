@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.dto.TripRequest;
 import com.example.demo.dto.TripUpdate;
 import com.example.demo.mapper.TripMapper;
+import com.example.demo.model.Tourist;
 import com.example.demo.model.Trip;
 import com.example.demo.service.TripService;
+import com.example.demo.utils.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +57,11 @@ public class TripController {
     public ResponseEntity<Optional<Trip>> delete(@RequestParam int id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(tripService.delete(id));
+    }
+
+    @GetMapping("/getTripByTouristId")
+    public  ResponseEntity<List<Trip>> getTripByTouristId(@RequestParam int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(tripService.getTripByTouristId(id));
     }
 }

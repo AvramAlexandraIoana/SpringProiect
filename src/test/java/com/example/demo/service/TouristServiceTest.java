@@ -141,4 +141,55 @@ public class TouristServiceTest {
         verify(touristRepository, times(1)).getById(tourist.getTouristId());
         verify(touristRepository, times(1)).delete(tourist.getTouristId());
     }
+
+    @Test
+    @DisplayName("Ordonarea turistiilor crescator dupa firstName")
+    public void orderTouristAscTest() throws ParseException {
+        //arrange
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthDate = format.parse("1998-12-23");
+        Tourist firstTourist = new Tourist(1, "Ion", "Popa", birthDate);
+        Tourist secondTourist = new Tourist(2, "Ana", "Avram", birthDate);
+        when(touristRepository.orderTuristsAsc()).thenReturn(
+                Arrays.asList(new Tourist(2, "Ana", "Avram", birthDate),
+                              new Tourist(1,"Ion", "Popa", birthDate))
+        );
+
+        //act
+        List<Tourist> result = touristService.orderTurists("asc");
+
+        //assert
+        Tourist tourist = result.get(0);
+        assertEquals(result.size(), 2);
+        assertEquals(tourist.getTouristId(), 2);
+        assertEquals(tourist.getFirstName(), "Ana");
+        assertEquals(tourist.getLastName(), "Avram");
+        assertEquals(tourist.getDateOfBirth(), birthDate);
+    }
+
+    @Test
+    @DisplayName("Ordonarea turistiilor descrescator dupa firstName")
+    public void orderTouristDescTest() throws ParseException {
+        //arrange
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthDate = format.parse("1998-12-23");
+        Tourist firstTourist = new Tourist(1, "Ion", "Popa", birthDate);
+        Tourist secondTourist = new Tourist(2, "Ana", "Avram", birthDate);
+        when(touristRepository.orderTuristsDesc()).thenReturn(
+                Arrays.asList(new Tourist(1, "Ion", "Popa", birthDate),
+                        new Tourist(2,"Ana", "Avram", birthDate))
+        );
+
+        //act
+        List<Tourist> result = touristService.orderTurists("desc");
+
+        //assert
+        Tourist tourist = result.get(0);
+        assertEquals(result.size(), 2);
+        assertEquals(tourist.getTouristId(), 1);
+        assertEquals(tourist.getFirstName(), "Ion");
+        assertEquals(tourist.getLastName(), "Popa");
+        assertEquals(tourist.getDateOfBirth(), birthDate);
+    }
+
 }

@@ -43,6 +43,6 @@ public class TouristService {
     }
 
     public List<Tourist> orderTurists(String type) {
-        return touristRepository.orderTurists(type);
+        return type.equals("asc") ? touristRepository.orderTuristsAsc() : touristRepository.orderTuristsDesc();
     }
 }
