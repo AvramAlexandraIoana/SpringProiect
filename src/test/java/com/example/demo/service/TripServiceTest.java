@@ -1,6 +1,7 @@
 package com.example.demo.service;
 import com.example.demo.model.MinMaxSumAvgPrice;
 import com.example.demo.model.Purchase;
+import com.example.demo.model.TouristTrip;
 import com.example.demo.model.Trip;
 import com.example.demo.repository.PurchaseRepository;
 import com.example.demo.repository.TripRepository;
@@ -206,6 +207,36 @@ public class TripServiceTest {
 
 
         verify(tripRepository, times(1)).minMaxSumAvgPrices();
+    }
+
+    @Test
+    @DisplayName("Numele excursiei, pretul excursiei, durata excursiei, numele si prenumele turistilor care au achizitionat excursii mai scumpe decat turistul cu id-ul y. Sortati rezultatele dupa pret, in ordine descrecatoare")
+    public void expensiveTripThanTest() throws ParseException {
+        //arrange
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = format.parse("2020-12-25");
+        Date endDate = format.parse("2020-12-31");
+        Purchase purchase = new Purchase(1, 1, startDate, endDate, new Date(), 12.2);
+        TouristTrip touristTrip = new TouristTrip("Ioana", "Avram", "Roma", 343.0, 2, 3);
+        when(purchaseRepository.getByTouristId(1)).thenReturn(Optional.of(purchase));
+        when(tripRepository.expensiveTripThan(1)).thenReturn(
+                Arrays.asList( new TouristTrip("Ioana", "Avram", "Roma", 343.0, 2, 3))
+        );
+
+        //act
+        List<TouristTrip> result = tripService.expensiveTripThan(1);
+
+        //assert
+        assertEquals(result.size(), 1);
+        assertEquals(touristTrip.getFirstName(), result.get(0).getFirstName());
+        assertEquals(touristTrip.getLastName(), result.get(0).getLastName());
+        assertEquals(touristTrip.getName(), result.get(0).getName());
+        assertEquals(touristTrip.getDuration(), result.get(0).getDuration());
+        assertEquals(touristTrip.getNumberOfSeats(), result.get(0).getNumberOfSeats());
+
+
+        verify(purchaseRepository, times(1)).getByTouristId(1);
+        verify(tripRepository, times(1)).expensiveTripThan(1);
     }
 
 

@@ -3,9 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.TripRequest;
 import com.example.demo.dto.TripUpdate;
 import com.example.demo.mapper.TripMapper;
-import com.example.demo.model.MinMaxSumAvgPrice;
-import com.example.demo.model.Tourist;
-import com.example.demo.model.Trip;
+import com.example.demo.model.*;
 import com.example.demo.service.TripService;
 import com.example.demo.utils.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -79,4 +77,13 @@ public class TripController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(tripService.minMaxSumAvgPrices());
     }
+
+    /*
+    Sa se afiseze numele excursiei, numele si prenumele turistilor care au achizitionat excursii
+    mai scumpe decat turistul cu id-ul y. Sortati rezultatele dupa pret, in ordine descrecatoare.
+     */
+    @GetMapping("/expensiveTripThan")
+    public ResponseEntity<List<TouristTrip>> expensiveTripThan(@RequestParam int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(tripService.expensiveTripThan(id));    }
 }

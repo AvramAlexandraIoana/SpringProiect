@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.MinMaxSumAvgPrice;
-import com.example.demo.model.Purchase;
-import com.example.demo.model.Tourist;
-import com.example.demo.model.Trip;
+import com.example.demo.model.*;
 import com.example.demo.queries.TripQueries;
 import com.example.demo.repository.PurchaseRepository;
 import com.example.demo.repository.TouristRepository;
@@ -59,5 +56,13 @@ public class TripService {
 
     public List<MinMaxSumAvgPrice> minMaxSumAvgPrices() {
         return tripRepository.minMaxSumAvgPrices();
+    }
+
+    public List<TouristTrip> expensiveTripThan(int id) {
+        Optional<Purchase> existingPurchaseWithTouristId = purchaseRepository.getByTouristId(id);
+        if (existingPurchaseWithTouristId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista nicio excursie achizitionata de turistul cu acest id!");
+        }
+        return tripRepository.expensiveTripThan(id);
     }
 }
