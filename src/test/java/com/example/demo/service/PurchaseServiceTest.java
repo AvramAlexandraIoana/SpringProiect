@@ -56,7 +56,7 @@ public class PurchaseServiceTest {
 
     @Test
     @DisplayName("Adaugarea unei achizitii in repo")
-    public void createPurchaseTest() throws ParseException {
+    public void createTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = format.parse("2020-12-25");
@@ -80,7 +80,7 @@ public class PurchaseServiceTest {
 
     @Test
     @DisplayName("Afisarea achizitiilor")
-    public void getAllPurchasesTest() throws ParseException {
+    public void getTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = format.parse("2020-12-25");
@@ -104,7 +104,7 @@ public class PurchaseServiceTest {
 
     @Test
     @DisplayName("Updatarea unei achizitii")
-    public void updatePurchaseTest() throws ParseException {
+    public void updateTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = format.parse("2020-12-25");
@@ -130,7 +130,7 @@ public class PurchaseServiceTest {
 
     @Test
     @DisplayName("Stergerea unei achizitii")
-    public void deletePurchaseTest() throws ParseException {
+    public void deleteTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = format.parse("2020-12-25");

@@ -54,7 +54,7 @@ public class TouristServiceTest {
 
     @Test
     @DisplayName("Adaugarea unei turist in repo")
-    public void createTouristTest() throws ParseException {
+    public void createTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date birthDate = format.parse("1998-12-23");
@@ -75,7 +75,7 @@ public class TouristServiceTest {
 
     @Test
     @DisplayName("Afisarea turistiilor")
-    public void getAllTouristsTest() throws ParseException {
+    public void getTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date birthDate = format.parse("1998-12-23");
@@ -97,7 +97,7 @@ public class TouristServiceTest {
 
     @Test
     @DisplayName("Updatarea unui turist")
-    public void updateTouristTest() throws ParseException {
+    public void updateTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date birthDate = format.parse("1998-12-23");
@@ -120,7 +120,7 @@ public class TouristServiceTest {
 
     @Test
     @DisplayName("Stergerea unui turist")
-    public void deleteTouristTest() throws ParseException {
+    public void deleteTest() throws ParseException {
         //arrange
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date birthDate = format.parse("1998-12-23");

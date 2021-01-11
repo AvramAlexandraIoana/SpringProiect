@@ -57,4 +57,14 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(locationService.delete(id));
     }
+
+
+    /*
+        Sa se afiseze locatiile din tara cu numele z.
+     */
+    @GetMapping("/getLocationForCountryName")
+    public ResponseEntity<List<Location>> getLocationForCountryName(@RequestParam String name) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationService.getLocationForCountryName(name));
+    }
 }

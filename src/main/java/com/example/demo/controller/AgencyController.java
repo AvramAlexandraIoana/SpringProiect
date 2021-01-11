@@ -59,6 +59,9 @@ public class AgencyController {
                 .body(agencyService.delete(id));
     }
 
+    /*
+     Sa se afiseze id-ul, numele agentiei si numarul de excursii de la acea agentie
+     */
     @GetMapping("/agencyWithNumberOfTrips")
     public ResponseEntity<List<AgencyWithNumberOfTrips>> agencyWithNumberOfTrips() {
         return ResponseEntity.status(HttpStatus.OK)

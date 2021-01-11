@@ -1,8 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Country;
 import com.example.demo.model.Location;
+import com.example.demo.queries.LocationQueries;
+import com.example.demo.repository.CountryRepository;
 import com.example.demo.repository.LocationRepository;
 import com.example.demo.utils.ObjectNotFoundException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +15,11 @@ import java.util.Optional;
 @Service
 public class LocationService {
     private LocationRepository locationRepository;
+    private CountryRepository countryRepository;
 
-    public LocationService(LocationRepository locationRepository) {
+    public LocationService(LocationRepository locationRepository, CountryRepository countryRepository) {
         this.locationRepository = locationRepository;
+        this.countryRepository = countryRepository;
     }
 
     public Location create(Location location) {
@@ -38,5 +44,13 @@ public class LocationService {
             throw new ObjectNotFoundException("Nu exista locatia cu acest id!");
         }
         return locationRepository.delete(id);
+    }
+
+    public List<Location> getLocationForCountryName(String name) {
+        Optional<Country> existingCountryWithName = countryRepository.getByName(name);
+        if (existingCountryWithName.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista tara cu acest nume!");
+        }
+        return locationRepository.getLocationForCountryName(name);
     }
 }

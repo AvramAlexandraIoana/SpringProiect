@@ -64,7 +64,7 @@ public class CountryRepository {
         return getCountryFromResultSet(jdbcTemplate.query(CountryQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Country.class), id));
     }
 
-    public Optional<Country> getByName(int name) {
+    public Optional<Country> getByName(String name) {
         logger.info("S-a preluat tara cu numele", name);
         return getCountryFromResultSet(jdbcTemplate.query(CountryQueries.GETBYNAME_SQL, new BeanPropertyRowMapper<>(Country.class), name));
     }

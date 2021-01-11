@@ -61,7 +61,7 @@ public class TripServiceTest {
 
     @Test
     @DisplayName("Adaugarea unei excursii in repo")
-    public void createTripTest() {
+    public void createTest() {
         //arrange
         Trip trip = new Trip("Excursie Predeal", 200.0, 10, 2, 1 , 1);
         Trip savedTrip = new Trip(1,"Excursie Predeal", 200.0, 10, 2, 1 , 1);
@@ -83,7 +83,7 @@ public class TripServiceTest {
 
     @Test
     @DisplayName("Afisarea excursiilor")
-    public void getAllTripsTest(){
+    public void getTest(){
         //arrange
         when(tripRepository.get()).thenReturn(
                 Arrays.asList(new Trip(1,"Excursie Predeal", 200.0, 10, 2, 1 , 1))
@@ -106,7 +106,7 @@ public class TripServiceTest {
 
     @Test
     @DisplayName("Updatarea unei excrusii")
-    public void updateTripTest() {
+    public void updateTest() {
         //arrange
         Trip trip = new Trip(1,"Excursie Predeal", 200.0, 10, 2, 1 , 1);
         when(tripRepository.getById(trip.getTripId())).thenReturn(Optional.of(trip));
@@ -130,7 +130,7 @@ public class TripServiceTest {
 
     @Test
     @DisplayName("Stergerea unei excursii")
-    public void deleteAgencyTest() {
+    public void deleteTest() {
         //arrange
         Trip trip = new Trip(1,"Excursie Predeal", 200.0, 10, 2, 1 , 1);
         when(tripRepository.getById(trip.getTripId())).thenReturn(Optional.of(trip));

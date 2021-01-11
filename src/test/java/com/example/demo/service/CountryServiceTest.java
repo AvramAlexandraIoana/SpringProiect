@@ -51,7 +51,7 @@ public class CountryServiceTest {
 
     @Test
     @DisplayName("Adaugarea unei tari in repo")
-    public void createCountryTest() {
+    public void createTest() {
         //arrange
         Country country = new Country("Romania");
         Country savedCountry = new Country(1, "Romania");
@@ -68,7 +68,7 @@ public class CountryServiceTest {
 
     @Test
     @DisplayName("Afisarea tarilor")
-    public void getAllCountriesTest(){
+    public void getTest(){
         //arrange
         when(countryRepository.get()).thenReturn(
                 Arrays.asList(new Country(1, "Romania"))
@@ -86,7 +86,7 @@ public class CountryServiceTest {
 
     @Test
     @DisplayName("Updatarea unei tari")
-    public void updateCountryTest() {
+    public void updateTest() {
         //arrange
         Country country = new Country(1, "Romania");
         when(countryRepository.getById(country.getCountryId())).thenReturn(Optional.of(country));
@@ -105,7 +105,7 @@ public class CountryServiceTest {
 
     @Test
     @DisplayName("Stergerea unei tari")
-    public void deleteCountryTest() {
+    public void deleteTest() {
         //arrange
         Country country = new Country(1, "Romania");
         when(countryRepository.getById(country.getCountryId())).thenReturn(Optional.of(country));

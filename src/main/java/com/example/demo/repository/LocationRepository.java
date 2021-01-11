@@ -75,5 +75,11 @@ public class LocationRepository {
         }
     }
 
+    public List<Location> getLocationForCountryName(String name) {
+        logger.info("S-a preluat locatiile din tara cu numele ", name);
+        List<Location> locations = jdbcTemplate.query(LocationQueries.GETLOCATIONFORCOUNTRYNAME_SQL, new BeanPropertyRowMapper<>(Location.class), name);
+        return  locations;
+    }
+
 
 }

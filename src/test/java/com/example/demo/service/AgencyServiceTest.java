@@ -51,7 +51,7 @@ public class AgencyServiceTest {
 
     @Test
     @DisplayName("Adaugarea unei agentii in repo")
-    public void createAgencyTest() {
+    public void createTest() {
         //arrange
         Agency agency = new Agency("Ego Travel Romania", 1);
         Agency savedAgency = new Agency(1, "Ego Travel Romania", 1);
@@ -69,7 +69,7 @@ public class AgencyServiceTest {
 
     @Test
     @DisplayName("Afisarea agentiilor")
-    public void getAllAgenciesTest(){
+    public void getTest(){
         //arrange
         when(agencyRepository.get()).thenReturn(
                 Arrays.asList(new Agency(1, "Ego Travel Romania", 1))
@@ -88,7 +88,7 @@ public class AgencyServiceTest {
 
     @Test
     @DisplayName("Updatarea unei agentii")
-    public void updateAgencyTest() {
+    public void updateTest() {
         //arrange
         Agency agency = new Agency(1, "Ego Travel Romania", 1);
         when(agencyRepository.getById(agency.getAgencyId())).thenReturn(Optional.of(agency));
@@ -108,7 +108,7 @@ public class AgencyServiceTest {
 
     @Test
     @DisplayName("Stergerea unei agentii")
-    public void deleteAgencyTest() {
+    public void deleteTest() {
         //arrange
         Agency agency = new Agency(1, "Ego Travel Romania", 1);
         when(agencyRepository.getById(agency.getAgencyId())).thenReturn(Optional.of(agency));
