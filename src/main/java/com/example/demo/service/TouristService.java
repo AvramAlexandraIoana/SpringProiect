@@ -45,4 +45,8 @@ public class TouristService {
     public List<Tourist> orderTurists(String type) {
         return type.equals("asc") ? touristRepository.orderTuristsAsc() : touristRepository.orderTuristsDesc();
     }
+
+    public List<Tourist> getByBirthDate(int year) {
+        return touristRepository.getByBirthDate(year);
+    }
 }

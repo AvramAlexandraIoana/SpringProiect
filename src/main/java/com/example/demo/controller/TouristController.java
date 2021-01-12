@@ -67,4 +67,13 @@ public class TouristController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(touristService.orderTurists(type));
     }
+
+    /*
+    Sa se determine toti turistii nascuti in anul x.
+     */
+    @GetMapping("/getByBirthDate")
+    public ResponseEntity<List<Tourist>> getByBirthDate(int year) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(touristService.getByBirthDate(year));
+    }
 }

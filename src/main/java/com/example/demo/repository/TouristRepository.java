@@ -87,4 +87,11 @@ public class TouristRepository {
         return tourists;
     }
 
+
+    public List<Tourist> getByBirthDate(int year) {
+        List<Tourist> tourists = jdbcTemplate.query(TouristQueries.GETBYDATEOFBIRTH_SQL, new BeanPropertyRowMapper<>(Tourist.class), year);
+        logger.info("Preluam toti turistii nascuti in anul " + year , tourists);
+        return tourists;
+    }
+
 }

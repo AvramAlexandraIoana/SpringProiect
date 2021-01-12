@@ -8,4 +8,7 @@ public class TouristQueries {
     public final static String GETBYID_SQL = "SELECT * FROM tourist WHERE touristId = ?";
     public final static String ORDER_ASC_SQL = "SELECT * FROM tourist ORDER BY firstName ASC";
     public final static String ORDER_DESC_SQL = "SELECT * FROM tourist ORDER BY firstName DESC";
+    public final static String GETBYDATEOFBIRTH_SQL = "select *  " +
+            " from mydb.tourist  " +
+            " where year(dateOfBirth) = ?";
 }

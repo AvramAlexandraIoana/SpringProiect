@@ -192,4 +192,28 @@ public class TouristServiceTest {
         assertEquals(tourist.getDateOfBirth(), birthDate);
     }
 
+
+    @Test
+    @DisplayName("Se determina toti turistii nascuti in anul x")
+    public void getByBirthDateTest() throws ParseException {
+        //arrange
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthDate = format.parse("1998-12-23");
+        Tourist tourist = new Tourist(1, "Ion", "Popescu", birthDate);
+        when(touristRepository.getByBirthDate(1998)).thenReturn(
+                Arrays.asList(new Tourist(1, "Ion", "Popescu", birthDate))
+        );
+
+        //act
+        List<Tourist> result = touristService.getByBirthDate(1998);
+
+        //assert
+        assertEquals(result.size(), 1);
+        assertEquals(tourist.getTouristId(), result.get(0).getTouristId());
+        assertEquals(tourist.getFirstName(), result.get(0).getFirstName());
+        assertEquals(tourist.getLastName(), result.get(0).getLastName());
+        assertEquals(tourist.getDateOfBirth(), birthDate);
+    }
+
+
 }
