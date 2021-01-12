@@ -1,5 +1,6 @@
 package com.example.demo.service;
 import com.example.demo.model.Tourist;
+import com.example.demo.model.TouristNumberOfTrips;
 import com.example.demo.repository.TouristRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -214,6 +215,27 @@ public class TouristServiceTest {
         assertEquals(tourist.getLastName(), result.get(0).getLastName());
         assertEquals(tourist.getDateOfBirth(), birthDate);
     }
+
+
+    @Test
+    @DisplayName("Se afiseaza numele, prenumele turistului si numarul de excursii achizitonate.")
+    public void getTouristWithNumberOfTripsTest() throws ParseException {
+        //arrange
+        TouristNumberOfTrips touristNumberOfTrips = new TouristNumberOfTrips("Ion", "Popescu",3);
+        when(touristRepository.getTouristWithNumberOfTrips()).thenReturn(
+                Arrays.asList(new TouristNumberOfTrips("Ion", "Popescu",3))
+        );
+
+        //act
+        List<TouristNumberOfTrips> result = touristService.getTouristWithNumberOfTrips();
+
+        //assert
+        assertEquals(result.size(), 1);
+        assertEquals(touristNumberOfTrips.getFirstName(), result.get(0).getFirstName());
+        assertEquals(touristNumberOfTrips.getLastName(), result.get(0).getLastName());
+        assertEquals(touristNumberOfTrips.getTripCount(), result.get(0).getTripCount());
+    }
+
 
 
 }
