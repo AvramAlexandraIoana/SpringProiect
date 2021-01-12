@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Tourist;
+import com.example.demo.model.TouristNumberOfTrips;
 import com.example.demo.queries.TouristQueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,4 +95,9 @@ public class TouristRepository {
         return tourists;
     }
 
+    public List<TouristNumberOfTrips> getTouristWithNumberOfTrips() {
+        List<TouristNumberOfTrips> touristNumberOfTrips = jdbcTemplate.query(TouristQueries.TOURISTWITHNUMBEROFTRIPS_SQL, new BeanPropertyRowMapper<>(TouristNumberOfTrips.class));
+        logger.info("Preluam numele, prenumele turistului si numarul de excursii achizitonate. ");
+        return touristNumberOfTrips;
+    }
 }

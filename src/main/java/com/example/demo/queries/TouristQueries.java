@@ -11,4 +11,9 @@ public class TouristQueries {
     public final static String GETBYDATEOFBIRTH_SQL = "SELECT *  " +
             " FROM mydb.tourist  " +
             " WHERE year(dateOfBirth) = ?";
+
+    public final  static String TOURISTWITHNUMBEROFTRIPS_SQL = "SELECT firstName, lastName, COUNT(*) tripCount " +
+            " FROM mydb.tourist tourist join mydb.purchase " +
+            " on tourist.touristId = purchase.touristCode " +
+            " GROUP BY touristId, firstName;";
 }

@@ -4,6 +4,7 @@ import com.example.demo.dto.TouristRequest;
 import com.example.demo.dto.TouristUpdate;
 import com.example.demo.mapper.TouristMapper;
 import com.example.demo.model.Tourist;
+import com.example.demo.model.TouristNumberOfTrips;
 import com.example.demo.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,5 +76,14 @@ public class TouristController {
     public ResponseEntity<List<Tourist>> getByBirthDate(int year) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(touristService.getByBirthDate(year));
+    }
+
+    /*
+    Sa se afiseze numele, prenumele turistului si numarul de excursii achizitonate.
+     */
+    @GetMapping("/getTouristWithNumberOfTrips")
+    public ResponseEntity<List<TouristNumberOfTrips>> getTouristWithNumberOfTrips() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(touristService.getTouristWithNumberOfTrips());
     }
 }

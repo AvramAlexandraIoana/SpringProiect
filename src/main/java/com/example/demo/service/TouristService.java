@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Tourist;
+import com.example.demo.model.TouristNumberOfTrips;
 import com.example.demo.queries.TouristQueries;
 import com.example.demo.repository.TouristRepository;
 import com.example.demo.utils.ObjectNotFoundException;
@@ -48,5 +49,9 @@ public class TouristService {
 
     public List<Tourist> getByBirthDate(int year) {
         return touristRepository.getByBirthDate(year);
+    }
+
+    public List<TouristNumberOfTrips> getTouristWithNumberOfTrips() {
+        return touristRepository.getTouristWithNumberOfTrips();
     }
 }
