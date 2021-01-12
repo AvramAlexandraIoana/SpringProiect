@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -28,6 +31,37 @@ public class CountryServiceIT {
 
         assertNotNull(result.getCountryId());
         assertEquals(country.getName(), result.getName());
+    }
+
+    @Test
+    @DisplayName("Get country - happy flow")
+    public void getCountryHappyFlow(){
+
+        List<Country> result = countryService.get();
+
+        assertNotNull(result.get(0).getCountryId());
+    }
+
+    @Test
+    @DisplayName("Update country - happy flow")
+    public void updateCountryHappyFlow(){
+        Country country = new Country(3, "Polonia");
+
+        Country result = countryService.update(country);
+
+        assertNotNull(result.getCountryId());
+        assertEquals(country.getName(), result.getName());
+    }
+
+    @Test
+    @DisplayName("Delete country - happy flow")
+    public void deleteCountryHappyFlow(){
+        Country country = new Country(7, "ioana");
+
+        Optional<Country> result = countryService.delete(country.getCountryId());
+
+        assertNotNull(result.get().getCountryId());
+        assertEquals(result.get().getName(), country.getName());
     }
 
 }
