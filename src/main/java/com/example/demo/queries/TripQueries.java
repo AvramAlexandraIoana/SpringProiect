@@ -29,4 +29,10 @@ public class TripQueries {
             " on trip.locationId = location.locationId " +
             "    join mydb.country country " +
             "    on location.countryCode = country.countryId; ";
+
+    public final static String TOPOFTRIPS_SQL = "SELECT  trip.tripId, trip.name, trip.price, trip.numberOfSeats, trip.duration\n" +
+            " FROM (SELECT tripId, name, price, numberOfSeats, duration " +
+            " FROM  mydb.trip  " +
+            " ORDER BY price DESC)  as trip " +
+            "LIMIT ?";
 }

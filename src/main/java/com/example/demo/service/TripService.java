@@ -69,4 +69,8 @@ public class TripService {
     public List<TripCityAndCountryName> getTripWithCityAndCountryName() {
         return tripRepository.getTripWithCityAndCountryName();
     }
+
+    public List<TripsTop> getTopOfTrips(int number) {
+        return tripRepository.getTopOfTrips(number);
+    }
 }

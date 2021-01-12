@@ -260,4 +260,31 @@ public class TripServiceTest {
     }
 
 
+
+    @Test
+    @DisplayName("Se detemina id-ul, pretul, numarul de locuri si durata primelor x cele mai scumpe excursii.")
+    public void getTopOfTripsTest() throws ParseException {
+        //arrange
+        TripsTop tripsTop = new TripsTop(1, "Excursie Predeal", 2000.2, 10, 7);
+        when(tripRepository.getTopOfTrips(1)).thenReturn(
+                Arrays.asList(new TripsTop(1, "Excursie Predeal", 2000.2, 10, 7))
+        );
+
+        //act
+        List<TripsTop> result = tripService.getTopOfTrips(1);
+
+        //assert
+        assertEquals(result.size(), 1);
+        assertEquals(tripsTop.getTripId(), result.get(0).getTripId());
+        assertEquals(tripsTop.getName(), result.get(0).getName());
+        assertEquals(tripsTop.getPrice(), result.get(0).getPrice());
+        assertEquals(tripsTop.getNumberOfSeats(), result.get(0).getNumberOfSeats());
+        assertEquals(tripsTop.getDuration(), result.get(0).getDuration());
+
+
+        verify(tripRepository, times(1)).getTopOfTrips(1);
+    }
+
+
+
 }

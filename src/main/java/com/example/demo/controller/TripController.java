@@ -97,4 +97,13 @@ public class TripController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(tripService.getTripWithCityAndCountryName());
     }
+
+    /*
+    Să se detemine id-ul, pretul, numarul de locuri si durata primelor x cele mai scumpe excursii.
+    */
+    @GetMapping("/getTopOfTrips")
+    public ResponseEntity<List<TripsTop>> getTopOfTrips(int number) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(tripService.getTopOfTrips(number));
+    }
 }

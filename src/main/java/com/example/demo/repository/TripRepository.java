@@ -103,4 +103,11 @@ public class TripRepository {
         return tripCityAndCountryNames;
     }
 
+    public List<TripsTop> getTopOfTrips(int number) {
+        List<TripsTop> tripsTops = jdbcTemplate.query(TripQueries.TOPOFTRIPS_SQL, new BeanPropertyRowMapper<>(TripsTop.class), number);
+        logger.info("Se preiau primele " + number + " cele mai scumpe excursii.");
+        return tripsTops;
+    }
+
+
 }
