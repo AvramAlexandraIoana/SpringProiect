@@ -1,8 +1,5 @@
 package com.example.demo.service;
-import com.example.demo.model.MinMaxSumAvgPrice;
-import com.example.demo.model.Purchase;
-import com.example.demo.model.TouristTrip;
-import com.example.demo.model.Trip;
+import com.example.demo.model.*;
 import com.example.demo.repository.PurchaseRepository;
 import com.example.demo.repository.TripRepository;
 import org.junit.jupiter.api.*;
@@ -237,6 +234,29 @@ public class TripServiceTest {
 
         verify(purchaseRepository, times(1)).getByTouristId(1);
         verify(tripRepository, times(1)).expensiveTripThan(1);
+    }
+
+    @Test
+    @DisplayName("Afisarea pentru fiecare excursie: numele, pretul, destinatia si tara din care provine.")
+    public void getTripWithCityAndCountryNameTest() throws ParseException {
+        //arrange
+        TripCityAndCountryName tripCityAndCountryName = new TripCityAndCountryName("Excursie Predeal", 1000.30, "Predeal", "Romania");
+        when(tripRepository.getTripWithCityAndCountryName()).thenReturn(
+                Arrays.asList( new TripCityAndCountryName("Excursie Predeal", 1000.30, "Predeal", "Romania"))
+        );
+
+        //act
+        List<TripCityAndCountryName> result = tripService.getTripWithCityAndCountryName();
+
+        //assert
+        assertEquals(result.size(), 1);
+        assertEquals(tripCityAndCountryName.getTripName(), result.get(0).getTripName());
+        assertEquals(tripCityAndCountryName.getTripPrice(), result.get(0).getTripPrice());
+        assertEquals(tripCityAndCountryName.getCity(), result.get(0).getCity());
+        assertEquals(tripCityAndCountryName.getCountry(), result.get(0).getCountry());
+
+
+        verify(tripRepository, times(1)).getTripWithCityAndCountryName();
     }
 
 

@@ -65,4 +65,8 @@ public class TripService {
         }
         return tripRepository.expensiveTripThan(id);
     }
+
+    public List<TripCityAndCountryName> getTripWithCityAndCountryName() {
+        return tripRepository.getTripWithCityAndCountryName();
+    }
 }

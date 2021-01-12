@@ -1,9 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.MinMaxSumAvgPrice;
-import com.example.demo.model.Tourist;
-import com.example.demo.model.TouristTrip;
-import com.example.demo.model.Trip;
+import com.example.demo.model.*;
 import com.example.demo.queries.TripQueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,6 +95,12 @@ public class TripRepository {
         List<TouristTrip>  touristTrips = jdbcTemplate.query(TripQueries.EXPENSIVETRIPSTHAN_SQL, new BeanPropertyRowMapper<>(TouristTrip.class), id);
         logger.info("Se preia numele excursiei, numele si prenumele turistilor care au achizitionat excursii mai scumpe decat turistul cu id-ul y. Sortati rezultatele dupa pret, in ordine descrecatoare", id);
         return touristTrips;
+    }
+
+    public List<TripCityAndCountryName> getTripWithCityAndCountryName() {
+        List<TripCityAndCountryName> tripCityAndCountryNames = jdbcTemplate.query(TripQueries.GETTRIPWITHCITYANDCOUNTRY_SQL, new BeanPropertyRowMapper<>(TripCityAndCountryName.class));
+        logger.info("Se preiau pentru  fiecare excursie numele, pretul, destinatia si tara din care provine.");
+        return tripCityAndCountryNames;
     }
 
 }

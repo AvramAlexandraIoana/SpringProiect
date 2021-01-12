@@ -85,5 +85,16 @@ public class TripController {
     @GetMapping("/expensiveTripThan")
     public ResponseEntity<List<TouristTrip>> expensiveTripThan(@RequestParam int id) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(tripService.expensiveTripThan(id));    }
+                .body(tripService.expensiveTripThan(id));
+    }
+
+
+    /*
+    Sa se afiseze pentru fiecare excursie numele, pretul, destinatia si tara din care provine.
+     */
+    @GetMapping("/getTripWithCityAndCountryName")
+    public ResponseEntity<List<TripCityAndCountryName>> getTripWithCityAndCountryName() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(tripService.getTripWithCityAndCountryName());
+    }
 }

@@ -23,4 +23,10 @@ public class TripQueries {
                                        " join mydb.trip trip on trip.tripId = purchase.tripCode " +
                                     " WHERE tourist.touristId = ?) " +
             " ORDER BY tr.price DESC; ";
+
+    public final static  String GETTRIPWITHCITYANDCOUNTRY_SQL = "SELECT trip.name tripName, trip.price tripPrice, location.city city, country.name country\n" +
+            " FROM mydb.trip trip join mydb.location location  " +
+            " on trip.locationId = location.locationId " +
+            "    join mydb.country country " +
+            "    on location.countryCode = country.countryId; ";
 }
