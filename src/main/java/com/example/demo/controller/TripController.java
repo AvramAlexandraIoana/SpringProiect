@@ -58,6 +58,12 @@ public class TripController {
                 .body(tripService.delete(id));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Trip>> getById(@PathVariable  int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(tripService.getById(id));
+    }
+
 
     /*
     Sa se afiseze toate excursiile achizitionate de turistul cu id-ul x.

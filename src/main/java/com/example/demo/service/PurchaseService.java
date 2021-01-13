@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Purchase;
+import com.example.demo.model.Trip;
 import com.example.demo.repository.PurchaseRepository;
 import com.example.demo.utils.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,13 @@ public class PurchaseService {
             throw new ObjectNotFoundException("Nu exista achizitia cu aceste id-uri!");
         }
         return purchaseRepository.delete(touristId, tripId);
+    }
+
+    public Optional<Purchase> getById(int touristId, int tripId) {
+        Optional<Purchase> existingPurchaseWithId = purchaseRepository.getById(touristId, tripId);
+        if (existingPurchaseWithId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista achizitie cu aceste id-uri!");
+        }
+        return  existingPurchaseWithId;
     }
 }

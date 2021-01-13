@@ -39,10 +39,12 @@ public class CountryControllerIT {
 
     @Test
     public void createCountryHappyFlow() throws Exception {
+        //arrange
         CountryRequest request = new CountryRequest("S.U.A");
 
         when(countryService.create(any())).thenReturn(new Country(1, "S.U.A"));
 
+        //act + assert
         mockMvc.perform(post("/countries/create")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(request)))
@@ -52,13 +54,14 @@ public class CountryControllerIT {
 
     @Test
     public void getCountryHappyFlow() throws Exception {
-
+        //arrange
         Country country = new Country(1,"S.U.A");
 
         when(countryService.get()).thenReturn(
                 Arrays.asList(new Country(1, "S.U.A"))
         );
 
+        //act + assert
         mockMvc.perform(get("/countries/get")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(Arrays.asList(new Country(1, "S.U.A")))))
@@ -67,12 +70,13 @@ public class CountryControllerIT {
     }
 
     @Test
-    public void updateCountryHappyFlow() throws Exception{
+    public void updateCountryHappyFlow() throws Exception {
+        //arrange
         CountryUpdate countryUpdate = new CountryUpdate(3, "Polonia");
 
         when(countryService.update(any())).thenReturn(new Country(3, "Polonia"));
 
-
+        //act + assert
         mockMvc.perform(put("/countries/update")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(countryUpdate)))
@@ -81,14 +85,15 @@ public class CountryControllerIT {
     }
 
     @Test
-    public void deleteCountryHappyFlow() throws Exception{
+    public void deleteCountryHappyFlow() throws Exception {
+        //arrange
         Country country = new Country(3, "Polonia");
         Optional<Country> result = Optional.of(country);
 
 
         when(countryService.delete(3)).thenReturn(result);
 
-
+        //act + assert
         mockMvc.perform(delete("/countries/delete?id=" + country.getCountryId())
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(country)))

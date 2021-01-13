@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.TouristRequest;
 import com.example.demo.dto.TouristUpdate;
 import com.example.demo.mapper.TouristMapper;
+import com.example.demo.model.Location;
 import com.example.demo.model.Tourist;
 import com.example.demo.model.TouristNumberOfTrips;
 import com.example.demo.service.TouristService;
@@ -59,6 +60,11 @@ public class TouristController {
                 .body(touristService.delete(id));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Tourist>> getById(@PathVariable  int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(touristService.getById(id));
+    }
 
     /*
     Sa se afiseze turistii ordonati crescator/descrescator dupa nume.

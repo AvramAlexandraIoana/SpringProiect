@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.PurchaseRequest;
 import com.example.demo.dto.PurchaseUpdate;
 import com.example.demo.mapper.PurchaseMapper;
+import com.example.demo.model.Location;
 import com.example.demo.model.Purchase;
 import com.example.demo.service.PurchaseService;
 import org.springframework.http.HttpStatus;
@@ -57,5 +58,11 @@ public class PurchaseController {
     public ResponseEntity<Optional<Purchase>> delete(@RequestParam int touristId, @RequestParam int tripId) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(purchaseService.delete(touristId, tripId));
+    }
+
+    @GetMapping("/{touristId}/{tripId}")
+    public ResponseEntity<Optional<Purchase>> getById(@PathVariable  int touristId, @PathVariable  int tripId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(purchaseService.getById(touristId, tripId));
     }
 }

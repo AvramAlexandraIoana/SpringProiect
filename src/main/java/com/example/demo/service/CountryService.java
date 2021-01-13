@@ -26,6 +26,15 @@ public class CountryService {
         return countryRepository.get();
     }
 
+    public Optional<Country> getById(int id) {
+        Optional<Country> existingCountryWithId = countryRepository.getById(id);
+        if (existingCountryWithId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista tara cu acest id!");
+        }
+        return  existingCountryWithId;
+    }
+
+
     public Country update(Country country) {
         Optional<Country> existingCountryWithId = countryRepository.getById(country.getCountryId());
         if (existingCountryWithId.isEmpty()) {

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.LocationRequest;
 import com.example.demo.dto.LocationUpdate;
 import com.example.demo.mapper.LocationMapper;
+import com.example.demo.model.Agency;
 import com.example.demo.model.Location;
 import com.example.demo.service.LocationService;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,12 @@ public class LocationController {
     public ResponseEntity<Optional<Location>> delete(@RequestParam int id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(locationService.delete(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Location>> getById(@PathVariable  int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationService.getById(id));
     }
 
 

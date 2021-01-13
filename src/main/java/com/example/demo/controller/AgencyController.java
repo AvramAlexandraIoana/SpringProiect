@@ -5,6 +5,7 @@ import com.example.demo.dto.AgencyUpdate;
 import com.example.demo.mapper.AgencyMapper;
 import com.example.demo.model.Agency;
 import com.example.demo.model.AgencyWithNumberOfTrips;
+import com.example.demo.model.Country;
 import com.example.demo.service.AgencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +58,12 @@ public class AgencyController {
     public ResponseEntity<Optional<Agency>> delete(@RequestParam int id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(agencyService.delete(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Agency>> getById(@PathVariable  int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(agencyService.getById(id));
     }
 
     /*

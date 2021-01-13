@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Agency;
 import com.example.demo.model.AgencyWithNumberOfTrips;
+import com.example.demo.model.Country;
 import com.example.demo.queries.AgencyQueries;
 import com.example.demo.repository.AgencyRepository;
 import com.example.demo.utils.ObjectNotFoundException;
@@ -44,7 +45,17 @@ public class AgencyService {
         return agencyRepository.delete(id);
     }
 
+    public Optional<Agency> getById(int id) {
+        Optional<Agency> existingAgencyWithId = agencyRepository.getById(id);
+        if (existingAgencyWithId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista agentie cu acest id!");
+        }
+        return  existingAgencyWithId;
+    }
+
     public List<AgencyWithNumberOfTrips> agencyWithNumberOfTrips() {
         return  agencyRepository.agencyWithNumberOfTrips();
     }
+
+
 }

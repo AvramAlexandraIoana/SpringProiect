@@ -34,7 +34,7 @@ public class CountryServiceIT {
     }
 
     @Test
-    @DisplayName("Get country - happy flow")
+    @DisplayName("Get countries - happy flow")
     public void getCountryHappyFlow(){
 
         List<Country> result = countryService.get();

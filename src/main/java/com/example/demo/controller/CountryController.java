@@ -58,4 +58,10 @@ public class CountryController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(countryService.delete(id));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Country>> getById(@PathVariable  int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(countryService.getById(id));
+    }
 }

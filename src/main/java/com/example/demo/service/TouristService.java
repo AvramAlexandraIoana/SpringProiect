@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Location;
 import com.example.demo.model.Tourist;
 import com.example.demo.model.TouristNumberOfTrips;
 import com.example.demo.queries.TouristQueries;
@@ -41,6 +42,14 @@ public class TouristService {
             throw new ObjectNotFoundException("Nu exista turist cu acest id!");
         }
         return touristRepository.delete(id);
+    }
+
+    public Optional<Tourist> getById(int id) {
+        Optional<Tourist> existingTouristWithId = touristRepository.getById(id);
+        if (existingTouristWithId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista turist cu acest id!");
+        }
+        return  existingTouristWithId;
     }
 
     public List<Tourist> orderTurists(String type) {

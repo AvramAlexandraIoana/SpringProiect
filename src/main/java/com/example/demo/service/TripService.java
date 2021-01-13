@@ -46,6 +46,14 @@ public class TripService {
         return tripRepository.delete(id);
     }
 
+    public Optional<Trip> getById(int id) {
+        Optional<Trip> existingTripWithId = tripRepository.getById(id);
+        if (existingTripWithId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista excursie cu acest id!");
+        }
+        return  existingTripWithId;
+    }
+
     public  List<Trip> getTripByTouristId(int id) {
         Optional<Purchase> existingPurchaseWithTouristId = purchaseRepository.getByTouristId(id);
         if (existingPurchaseWithTouristId.isEmpty()) {

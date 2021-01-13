@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Agency;
 import com.example.demo.model.Country;
 import com.example.demo.model.Location;
 import com.example.demo.queries.LocationQueries;
@@ -44,6 +45,14 @@ public class LocationService {
             throw new ObjectNotFoundException("Nu exista locatia cu acest id!");
         }
         return locationRepository.delete(id);
+    }
+
+    public Optional<Location> getById(int id) {
+        Optional<Location> existingLocationWithId = locationRepository.getById(id);
+        if (existingLocationWithId.isEmpty()) {
+            throw new ObjectNotFoundException("Nu exista locatie cu acest id!");
+        }
+        return  existingLocationWithId;
     }
 
     public List<Location> getLocationForCountryName(String name) {
