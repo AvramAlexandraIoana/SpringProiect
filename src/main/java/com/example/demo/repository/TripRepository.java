@@ -52,7 +52,7 @@ public class TripRepository {
     }
 
     public Trip update(Trip trip) {
-        logger.info("S-au updatat excursia cu id-ul", trip.getTripId());
+        logger.info("S-au updatat excursia cu id-ul " + trip.getTripId() + " {}", trip );
         jdbcTemplate.update(TripQueries.UPDATE_SQL, trip.getName(), trip.getPrice(), trip.getNumberOfSeats(), trip.getDuration(),
                 trip.getAgencyId(), trip.getLocationId(), trip.getTripId());
         return trip;
@@ -60,14 +60,15 @@ public class TripRepository {
 
     public Optional<Trip> delete(int id) {
         Optional<Trip> trip = getById(id);
-        logger.info("S-au sters excursia cu id-ul", id);
+        logger.info("S-au sters excursia cu id-ul " + id + " {} ", trip);
         jdbcTemplate.update(TripQueries.DELETE_SQL, id);
         return trip;
     }
 
     public Optional<Trip> getById(int id) {
-        logger.info("S-a preluat excursia cu id-ul", id);
-        return getTripFromResultSet(jdbcTemplate.query(TripQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Trip.class), id));
+        Optional<Trip> trip = getTripFromResultSet(jdbcTemplate.query(TripQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Trip.class), id));
+        logger.info("S-a preluat excursia cu id-ul " + id + " {} ", trip);
+        return  trip;
     }
 
 
@@ -81,31 +82,31 @@ public class TripRepository {
 
     public  List<Trip> getTripByTouristId(int id) {
         List<Trip> trips = jdbcTemplate.query(TripQueries.GETBYTOURISTID_SQL, new BeanPropertyRowMapper<>(Trip.class), id);
-        logger.info("S-a preluat excursiile achizitionate de turistul cu id-ul ", id);
+        logger.info("S-a preluat excursiile achizitionate de turistul cu id-ul " + id + " {}", trips);
         return  trips;
     }
 
     public List<MinMaxSumAvgPrice> minMaxSumAvgPrices() {
         List<MinMaxSumAvgPrice>  minMaxSumAvgPrices = jdbcTemplate.query(TripQueries.MINMAXSUMAVGPRICE_SQL, new BeanPropertyRowMapper<>(MinMaxSumAvgPrice.class));
-        logger.info("S-a preluat cel mai mare pret al unei excursii, cel mai mic pret, suma și media preturilor tuturor excursiilor ", minMaxSumAvgPrices);
+        logger.info("S-a preluat cel mai mare pret al unei excursii, cel mai mic pret, suma și media preturilor tuturor excursiilor {}", minMaxSumAvgPrices);
         return minMaxSumAvgPrices;
     }
 
     public List<TouristTrip> expensiveTripThan(int id) {
         List<TouristTrip>  touristTrips = jdbcTemplate.query(TripQueries.EXPENSIVETRIPSTHAN_SQL, new BeanPropertyRowMapper<>(TouristTrip.class), id);
-        logger.info("Se preia numele excursiei, numele si prenumele turistilor care au achizitionat excursii mai scumpe decat turistul cu id-ul y. Sortati rezultatele dupa pret, in ordine descrecatoare", id);
+        logger.info("Se preia numele excursiei, numele si prenumele turistilor care au achizitionat excursii mai scumpe decat turistul cu id-ul y. Sortati rezultatele dupa pret, in ordine descrecatoare " + id + "{}", touristTrips);
         return touristTrips;
     }
 
     public List<TripCityAndCountryName> getTripWithCityAndCountryName() {
         List<TripCityAndCountryName> tripCityAndCountryNames = jdbcTemplate.query(TripQueries.GETTRIPWITHCITYANDCOUNTRY_SQL, new BeanPropertyRowMapper<>(TripCityAndCountryName.class));
-        logger.info("Se preiau pentru  fiecare excursie numele, pretul, destinatia si tara din care provine.");
+        logger.info("Se preiau pentru  fiecare excursie numele, pretul, destinatia si tara din care provine {}", tripCityAndCountryNames);
         return tripCityAndCountryNames;
     }
 
     public List<TripsTop> getTopOfTrips(int number) {
         List<TripsTop> tripsTops = jdbcTemplate.query(TripQueries.TOPOFTRIPS_SQL, new BeanPropertyRowMapper<>(TripsTop.class), number);
-        logger.info("Se preiau primele " + number + " cele mai scumpe excursii.");
+        logger.info("Se preiau primele " + number + " cele mai scumpe excursii. {}", tripsTops);
         return tripsTops;
     }
 

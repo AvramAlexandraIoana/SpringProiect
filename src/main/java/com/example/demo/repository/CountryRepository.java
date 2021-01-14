@@ -47,26 +47,28 @@ public class CountryRepository {
     }
 
     public Country update(Country country) {
-        logger.info("S-au updatat tara cu id-ul", country.getCountryId());
+        logger.info("S-au updatat tara cu id-ul " +  country.getCountryId() + " {}", country);
         jdbcTemplate.update(CountryQueries.UPDATE_SQL, country.getName(), country.getCountryId());
         return country;
     }
 
     public Optional<Country> delete(int id) {
         Optional<Country> country = getById(id);
-        logger.info("S-au sters tara cu id-ul", id);
+        logger.info("S-au sters tara cu id-ul "  + id + " {}", country);
         jdbcTemplate.update(CountryQueries.DELETE_SQL, id);
         return country;
     }
 
     public Optional<Country> getById(int id) {
-        logger.info("S-a preluat tara cu id-ul", id);
-        return getCountryFromResultSet(jdbcTemplate.query(CountryQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Country.class), id));
+        Optional<Country> country = getCountryFromResultSet(jdbcTemplate.query(CountryQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Country.class), id));
+        logger.info("S-a preluat tara cu id-ul " + id + " {}", country);
+        return country;
     }
 
     public Optional<Country> getByName(String name) {
-        logger.info("S-a preluat tara cu numele", name);
-        return getCountryFromResultSet(jdbcTemplate.query(CountryQueries.GETBYNAME_SQL, new BeanPropertyRowMapper<>(Country.class), name));
+        Optional<Country> country = getCountryFromResultSet(jdbcTemplate.query(CountryQueries.GETBYNAME_SQL, new BeanPropertyRowMapper<>(Country.class), name));
+        logger.info("S-a preluat tara cu numele " + name + " {}", country);
+        return country;
     }
 
     private Optional<Country> getCountryFromResultSet(List<Country> countries) {

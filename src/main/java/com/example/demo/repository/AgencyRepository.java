@@ -48,21 +48,22 @@ public class AgencyRepository {
     }
 
     public Agency update(Agency agency) {
-        logger.info("S-au updatat agentia cu id-ul", agency.getAgencyId());
+        logger.info("S-au updatat agentia cu id-ul " + agency.getAgencyId() + " {}", agency);
         jdbcTemplate.update(AgencyQueries.UPDATE_SQL, agency.getName(), agency.getLocationCode(), agency.getAgencyId());
         return agency;
     }
 
     public Optional<Agency> delete(int id) {
         Optional<Agency> agency = getById(id);
-        logger.info("S-au sters agentia cu id-ul", id);
+        logger.info("S-au sters agentia cu id-ul " + id + " {}", agency);
         jdbcTemplate.update(AgencyQueries.DELETE_SQL, id);
         return agency;
     }
 
     public Optional<Agency> getById(int id) {
-        logger.info("S-a preluat agentia cu id-ul", id);
-        return getAgencyFromResultSet(jdbcTemplate.query(AgencyQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Agency.class), id));
+        Optional<Agency> agency = getAgencyFromResultSet(jdbcTemplate.query(AgencyQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Agency.class), id));
+        logger.info("S-a preluat agentia cu id-ul " + id + " {}", agency);
+        return agency;
     }
 
 
@@ -75,8 +76,9 @@ public class AgencyRepository {
     }
 
     public List<AgencyWithNumberOfTrips> agencyWithNumberOfTrips() {
-        logger.info("Se afiseaza id-ul, numele agentiei si numarul de excursii de la acea agentie!");
         List<AgencyWithNumberOfTrips> agencyWithNumberOfTrips = jdbcTemplate.query(AgencyQueries.GETAGENCYWITHNUMBEROFTRIPS_SQL, new BeanPropertyRowMapper<>(AgencyWithNumberOfTrips.class));
+        logger.info("Se afiseaza id-ul, numele agentiei si numarul de excursii de la acea agentie {}", agencyWithNumberOfTrips);
+
         return  agencyWithNumberOfTrips;
     }
 }

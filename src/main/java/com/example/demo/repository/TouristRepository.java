@@ -50,21 +50,22 @@ public class TouristRepository {
     }
 
     public Tourist update(Tourist tourist) {
-        logger.info("S-au updatat turistul cu id-ul", tourist.getTouristId());
+        logger.info("S-au updatat turistul cu id-ul " + tourist.getTouristId() + " {}", tourist);
         jdbcTemplate.update(TouristQueries.UPDATE_SQL, tourist.getFirstName(), tourist.getLastName(), tourist.getDateOfBirth(), tourist.getTouristId());
         return tourist;
     }
 
     public Optional<Tourist> delete(int id) {
         Optional<Tourist> tourist = getById(id);
-        logger.info("S-au sters turistul cu id-ul", id);
+        logger.info("S-au sters turistul cu id-ul " + id + " {}", tourist);
         jdbcTemplate.update(TouristQueries.DELETE_SQL, id);
         return tourist;
     }
 
     public Optional<Tourist> getById(int id) {
-        logger.info("S-a preluat turistul cu id-ul", id);
-        return getTouristFromResultSet(jdbcTemplate.query(TouristQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Tourist.class), id));
+        Optional<Tourist> tourist = getTouristFromResultSet(jdbcTemplate.query(TouristQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Tourist.class), id));
+        logger.info("S-a preluat turistul cu id-ul " + id + " {}", tourist);
+        return tourist;
     }
 
 
@@ -84,20 +85,20 @@ public class TouristRepository {
 
     public List<Tourist> orderTuristsDesc() {
         List<Tourist> tourists = jdbcTemplate.query(TouristQueries.ORDER_DESC_SQL, new BeanPropertyRowMapper<>(Tourist.class));
-        logger.info("Ordam turistii descrecator ", tourists);
+        logger.info("Ordam turistii descrecator {} ", tourists);
         return tourists;
     }
 
 
     public List<Tourist> getByBirthDate(int year) {
         List<Tourist> tourists = jdbcTemplate.query(TouristQueries.GETBYDATEOFBIRTH_SQL, new BeanPropertyRowMapper<>(Tourist.class), year);
-        logger.info("Preluam toti turistii nascuti in anul " + year , tourists);
+        logger.info("Preluam toti turistii nascuti in anul " + year + "{}" , tourists);
         return tourists;
     }
 
     public List<TouristNumberOfTrips> getTouristWithNumberOfTrips() {
         List<TouristNumberOfTrips> touristNumberOfTrips = jdbcTemplate.query(TouristQueries.TOURISTWITHNUMBEROFTRIPS_SQL, new BeanPropertyRowMapper<>(TouristNumberOfTrips.class));
-        logger.info("Preluam numele, prenumele turistului si numarul de excursii achizitonate. ");
+        logger.info("Preluam numele, prenumele turistului si numarul de excursii achizitonate  {}", touristNumberOfTrips);
         return touristNumberOfTrips;
     }
 }

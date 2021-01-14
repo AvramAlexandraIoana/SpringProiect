@@ -49,21 +49,22 @@ public class LocationRepository {
     }
 
     public Location update(Location location) {
-        logger.info("S-au updatat locatia cu id-ul", location.getLocationId());
+        logger.info("S-au updatat locatia cu id-ul "  + location.getLocationId() + " {}", location);
         jdbcTemplate.update(LocationQueries.UPDATE_SQL, location.getCity(), location.getAddress(), location.getCountryCode(), location.getLocationId());
         return location;
     }
 
     public Optional<Location> delete(int id) {
         Optional<Location> location = getById(id);
-        logger.info("S-au sters locatia cu id-ul", id);
+        logger.info("S-au sters locatia cu id-ul " + id + " {}", location);
         jdbcTemplate.update(LocationQueries.DELETE_SQL, id);
         return location;
     }
 
     public Optional<Location> getById(int id) {
-        logger.info("S-a preluat locatia cu id-ul", id);
-        return getLocationFromResultSet(jdbcTemplate.query(LocationQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Location.class), id));
+        Optional<Location> location = getLocationFromResultSet(jdbcTemplate.query(LocationQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Location.class), id));
+        logger.info("S-a preluat locatia cu id-ul " + id + " {}", location);
+        return location;
     }
 
 
@@ -76,8 +77,8 @@ public class LocationRepository {
     }
 
     public List<Location> getLocationForCountryName(String name) {
-        logger.info("S-a preluat locatiile din tara cu numele ", name);
         List<Location> locations = jdbcTemplate.query(LocationQueries.GETLOCATIONFORCOUNTRYNAME_SQL, new BeanPropertyRowMapper<>(Location.class), name);
+        logger.info("S-a preluat locatiile din tara cu numele " + name + " {}", locations);
         return  locations;
     }
 

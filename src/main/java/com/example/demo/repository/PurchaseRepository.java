@@ -35,7 +35,7 @@ public class PurchaseRepository {
     }
 
     public Purchase update(Purchase purchase) {
-        logger.info("S-au updatat achizitia cu id-ul turistului ", purchase.getTouristCode(), " si id-ul excursiei", purchase.getTripCode());
+        logger.info("S-au updatat achizitia cu id-ul turistului " +  purchase.getTouristCode() + " si id-ul excursiei"  + purchase.getTripCode() + " {}", purchase);
         jdbcTemplate.update(PurchaseQueries.UPDATE_SQL, purchase.getStartDate(), purchase.getEndDate(), purchase.getPurchaseDate(),
                 purchase.getDiscount(), purchase.getTouristCode(), purchase.getTripCode());
         return purchase;
@@ -43,19 +43,21 @@ public class PurchaseRepository {
 
     public Optional<Purchase> delete(int touristId, int tripId) {
         Optional<Purchase> location = getById(touristId, tripId);
-        logger.info("S-au sters achizita cu id-ul turistului", touristId, " si id-ul excursiei ", tripId);
+        logger.info("S-au sters achizita cu id-ul turistului "  + touristId  +  " si id-ul excursiei " + tripId + " {}", location);
         jdbcTemplate.update(PurchaseQueries.DELETE_SQL, touristId, tripId);
         return location;
     }
 
     public Optional<Purchase> getById(int touristId, int tripId) {
-        logger.info("S-a preluat achizita cu id-ul turistului", touristId, " si id-ul excursiei ", tripId);
-        return getPurchaseFromResultSet(jdbcTemplate.query(PurchaseQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Purchase.class), touristId, tripId));
+        Optional<Purchase> purchase = getPurchaseFromResultSet(jdbcTemplate.query(PurchaseQueries.GETBYID_SQL, new BeanPropertyRowMapper<>(Purchase.class), touristId, tripId));
+        logger.info("S-a preluat achizita cu id-ul turistului " +  touristId +  " si id-ul excursiei " + tripId + " {}", purchase);
+        return purchase;
     }
 
     public Optional<Purchase> getByTouristId(int touristId) {
-        logger.info("S-a preluat achizita care are id-ul turistului", touristId);
-        return getPurchaseFromResultSet(jdbcTemplate.query(PurchaseQueries.GETBYTOURISTID_SQL, new BeanPropertyRowMapper<>(Purchase.class), touristId));
+        Optional<Purchase> purchase = getPurchaseFromResultSet(jdbcTemplate.query(PurchaseQueries.GETBYTOURISTID_SQL, new BeanPropertyRowMapper<>(Purchase.class), touristId));
+        logger.info("S-a preluat achizita care are id-ul turistului " + touristId + " {}", purchase);
+        return purchase;
     }
 
     private Optional<Purchase> getPurchaseFromResultSet(List<Purchase> purchases) {
