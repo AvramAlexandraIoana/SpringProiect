@@ -11,23 +11,23 @@ public class TripRequest {
     private String name;
 
     @NotNull(message = "Price nu poate fi null!")
-    @Range(min = 1, message = "Pretul trebuie sa fie mai mare decat 0!")
+    @Range(min = 0, message = "Pretul trebuie sa fie mai mare decat 0!")
     private Double price;
 
     @NotNull(message = "Numarul de locuri  nu poate fi null!")
-    @Range(min = 1, message = "Numarul de locuri trebuie sa fie mai mare decat 0!")
+    @Range(min = 1, message = "Numarul de locuri trebuie sa fie mai mare decat 1!")
     private int numberOfSeats;
 
     @NotNull(message = "Durata nu poate fi null!")
-    @Range(min = 1, message = "Durata trebuie sa fie mai mare decat 0!")
+    @Range(min = 1, message = "Durata trebuie sa fie mai mare decat 1!")
     private int duration;
 
     @NotNull(message = "Id-ul agentiei nu poate fi null!")
-    @Range(min = 1, message = "Id-ul agentiei trebuie sa fie mai mare decat 0!")
+    @Range(min = 1, message = "Id-ul agentiei trebuie sa fie mai mare decat 1!")
     private int agencyId;
 
     @NotNull(message = "Id-ul locatiei nu poate fi null!")
-    @Range(min = 1, message = "Id-ul locatiei trebuie sa fie mai mare decat 0!")
+    @Range(min = 1, message = "Id-ul locatiei trebuie sa fie mai mare decat 1!")
     private int locationId;
 
     public TripRequest() {
