@@ -45,7 +45,7 @@ public class CountryServiceIT {
     @Test
     @DisplayName("Update country - happy flow")
     public void updateCountryHappyFlow(){
-        Country country = new Country(3, "Polonia");
+        Country country = new Country(24, "Serbia");
 
         Country result = countryService.update(country);
 
@@ -56,7 +56,7 @@ public class CountryServiceIT {
     @Test
     @DisplayName("Delete country - happy flow")
     public void deleteCountryHappyFlow(){
-        Country country = new Country(7, "ioana");
+        Country country = new Country(24, "Serbia");
 
         Optional<Country> result = countryService.delete(country.getCountryId());
 

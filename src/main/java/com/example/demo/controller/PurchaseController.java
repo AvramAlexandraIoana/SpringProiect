@@ -36,7 +36,7 @@ public class PurchaseController {
                 fromHttpUrl(ServletUriComponentsBuilder.
                         fromCurrentRequestUri().
                         toUriString())
-                .replacePath("purchases/" + savedPurchase.getTouristCode())
+                .replacePath("purchases/" + savedPurchase.getTouristCode() + "/" + savedPurchase.getTripCode())
                 .build(savedPurchase.getTouristCode()))
                 .body(savedPurchase);
 
